@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Merchant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="game">
+
+        <!-- =========================
+             LEFT SIDE - CONSOLE
+        ========================== -->
+
+        <section class="console-panel">
+
+            <div class="console-header">
+                <h1>MERCHANT TERMINAL</h1>
+                <span id="connectionStatus">OFFLINE</span>
+            </div>
+
+            <div id="consoleOutput" class="console-output">
+
+                <div class="system-message">
+                    ====================================
+                </div>
+
+                <div class="system-message">
+                    THE MERCHANT'S SHOP
+                </div>
+
+                <div class="system-message">
+                    ====================================
+                </div>
+
+                <p>
+                    You enter a mysterious merchant's shop.
+                </p>
+
+                <p>
+                    Type <b>help</b> to see available commands.
+                </p>
+
+                <div class="merchant-message">
+                    Merchant: "Welcome, traveler..."
+                </div>
+
+            </div>
+
+            <form id="commandForm" class="command-area">
+
+                <span class="prompt">&gt;</span>
+
+                <input
+                    type="text"
+                    id="commandInput"
+                    placeholder="Talk to the merchant..."
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    SEND
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =========================
+             RIGHT SIDE - VISUAL
+        ========================== -->
+
+        <section class="visual-panel">
+
+            <div class="shop-background">
+
+                <!-- Shop background -->
+                <img
+                    src="images/background_shop.png"
+                    alt="Background of the merchant's shop"
+                    class="background-image"
+                >
+
+                <div class="visual-overlay"></div>
+
+
+                <!-- Merchant -->
+                <div class="merchant-container">
+
+                    <img
+                        id="merchantImage"
+                        src="images/normal.png"
+                        alt="Normal merchant standing inside the shop"
+                        class="merchant-image"
+                    >
+
+                </div>
+
+
+                <!-- Merchant name -->
+                <div class="merchant-name">
+                    <span id="merchantName">THE MERCHANT</span>
+
+                    <span id="merchantMood">
+                        NORMAL
+                    </span>
+                </div>
+
+
+                <!-- Game information -->
+                <div class="game-info">
+
+                    <div class="stat">
+                        <span>GOLD</span>
+                        <strong id="goldDisplay">100</strong>
+                    </div>
+
+                    <div class="stat">
+                        <span>REPUTATION</span>
+                        <strong id="reputationDisplay">0</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Item display -->
+                <div class="shop-items">
+
+                    <div class="item">
+
+                        <img
+                            src="images/potion.png"
+                            alt="Red healing potion"
+                        >
+
+                        <span>POTION</span>
+                        <small>20 GOLD</small>
+
+                    </div>
+
+
+                    <div class="item">
+
+                        <img
+                            src="images/sword.png"
+                            alt="Steel sword sold by the merchant"
+                        >
+
+                        <span>SWORD</span>
+                        <small>60 GOLD</small>
+
+                    </div>
+
+
+                    <div class="item">
+
+                        <img
+                            src="images/shield.png"
+                            alt="Wooden shield sold by the merchant"
+                        >
+
+                        <span>SHIELD</span>
+                        <small>40 GOLD</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>
