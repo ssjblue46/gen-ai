@@ -11,7 +11,7 @@
 // Example:
 // const GEMINI_API_KEY = "AIzaSy........";
 
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY";
+const GEMINI_API_KEY = "AQ.Ab8RN6LWcXC36niwJ8kPfSPpHqz7lm622mO8816_Io7hnyTqSg";
 
 
 // Current Gemini model.
