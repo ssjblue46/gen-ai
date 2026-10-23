@@ -1,0 +1,16 @@
+
+{
+  "name": "merchant-npc",
+  "version": "1.0.0",
+  "description": "AI-powered fantasy merchant NPC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
