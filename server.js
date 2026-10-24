@@ -1,4 +1,3 @@
-
 "use strict";
 
 const express = require("express");
@@ -9,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Gemini API configuration
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_MODEL = "gemini-flash-latest";
 
 const GEMINI_URL =
