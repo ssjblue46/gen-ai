@@ -1,7 +1,14 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -15,11 +22,11 @@ body {
 .game {
     width: 100%;
     height: 100vh;
-
     display: grid;
     grid-template-columns: 42% 58%;
+    overflow: hidden;
+    min-height: 0;
 }
-
 
 /* =====================================
    CONSOLE
@@ -27,17 +34,22 @@ body {
 
 .console-panel {
     background: #050505;
-
     border-right: 2px solid #333;
 
     display: flex;
     flex-direction: column;
 
     min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .console-header {
     height: 65px;
+    min-height: 65px;
+    flex-shrink: 0;
 
     padding: 0 20px;
 
@@ -46,7 +58,6 @@ body {
     justify-content: space-between;
 
     background: #111;
-
     border-bottom: 1px solid #333;
 }
 
@@ -57,29 +68,52 @@ body {
 
 #connectionStatus {
     font-size: 12px;
-
     padding: 6px 10px;
-
     border: 1px solid #555;
-
     border-radius: 4px;
-
     color: #aaa;
 }
 
-
-/* Console output */
+/* Console output - ONLY THIS SECTION SCROLLS */
 
 .console-output {
-    flex: 1;
+    flex: 1 1 0;
+    min-height: 0;
+    min-width: 0;
 
     padding: 20px;
 
-    overflow-y: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     line-height: 1.6;
-
     font-size: 14px;
+
+    overflow-wrap: anywhere;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #111;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+/* Chrome, Edge and other WebKit browsers */
+
+.console-output::-webkit-scrollbar {
+    width: 10px;
+}
+
+.console-output::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.console-output::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+    border: 2px solid #111;
+}
+
+.console-output::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 .console-output p {
@@ -92,73 +126,64 @@ body {
 
 .user-message {
     color: #58a6ff;
-
     margin: 14px 0;
 }
 
 .merchant-message {
     color: #f0a04b;
-
     margin: 14px 0;
-
     padding-left: 10px;
-
     border-left: 3px solid #f0a04b;
 }
 
 .error-message {
     color: #ff5555;
-
     margin: 12px 0;
 }
 
 .success-message {
     color: #65d681;
-
     margin: 12px 0;
 }
 
-
-/* Input */
+/* Input - FIXED AT BOTTOM */
 
 .command-area {
     height: 70px;
+    min-height: 70px;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
-
     gap: 10px;
 
     padding: 12px 15px;
 
     background: #111;
-
     border-top: 1px solid #333;
 }
 
 .prompt {
     color: #65d681;
-
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .command-area input {
     flex: 1;
+    min-width: 0;
 
     height: 42px;
 
     background: #050505;
-
     color: #ffffff;
 
     border: 1px solid #444;
-
     border-radius: 4px;
 
     padding: 0 12px;
 
     font-family: inherit;
-
     outline: none;
 }
 
@@ -168,15 +193,14 @@ body {
 
 .command-area button {
     height: 42px;
+    flex-shrink: 0;
 
     padding: 0 20px;
 
     background: #222;
-
     color: white;
 
     border: 1px solid #555;
-
     cursor: pointer;
 
     font-family: inherit;
@@ -186,42 +210,52 @@ body {
     background: #333;
 }
 
-
 /* =====================================
-   VISUAL SIDE
+   VISUAL SIDE - STAYS STATIONARY
 ===================================== */
 
 .visual-panel {
     position: relative;
 
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
     overflow: hidden;
+    isolation: isolate;
 }
 
 .shop-background {
-    position: relative;
+    position: absolute;
+    inset: 0;
 
     width: 100%;
     height: 100%;
+
+    overflow: hidden;
 }
 
 .background-image {
     position: absolute;
+    inset: 0;
 
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+    pointer-events: none;
 }
 
 .visual-overlay {
     position: absolute;
+    inset: 0;
 
     width: 100%;
     height: 100%;
 
     background: rgba(0, 0, 0, 0.25);
+    pointer-events: none;
 }
-
 
 /* Merchant */
 
@@ -234,21 +268,22 @@ body {
     transform: translate(-50%, -50%);
 
     width: 420px;
+    max-width: 90%;
 
     display: flex;
     justify-content: center;
+
+    pointer-events: none;
 }
 
 .merchant-image {
     max-width: 100%;
-
     max-height: 520px;
 
     object-fit: contain;
 
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.7));
 }
-
 
 /* Merchant name */
 
@@ -261,32 +296,25 @@ body {
     transform: translateX(-50%);
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     gap: 5px;
 
     text-shadow: 2px 2px 5px black;
+    pointer-events: none;
 }
 
 #merchantName {
     font-size: 24px;
-
     font-weight: bold;
-
     letter-spacing: 3px;
 }
 
 #merchantMood {
     font-size: 12px;
-
     color: #aaa;
-
     letter-spacing: 2px;
 }
-
 
 /* =====================================
    GAME INFO
@@ -299,8 +327,9 @@ body {
     right: 20px;
 
     display: flex;
-
     gap: 10px;
+
+    z-index: 2;
 }
 
 .stat {
@@ -311,26 +340,21 @@ body {
     background: rgba(0, 0, 0, 0.75);
 
     border: 1px solid #555;
-
     border-radius: 5px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 }
 
 .stat span {
     font-size: 10px;
-
     color: #aaa;
 }
 
 .stat strong {
     font-size: 18px;
 }
-
 
 /* =====================================
    SHOP ITEMS
@@ -345,73 +369,64 @@ body {
     transform: translateX(-50%);
 
     display: flex;
-
     gap: 15px;
+
+    z-index: 2;
 }
 
 .item {
     width: 110px;
+    flex-shrink: 0;
 
     padding: 10px;
 
     background: rgba(0, 0, 0, 0.8);
 
     border: 1px solid #555;
-
     border-radius: 6px;
 
     text-align: center;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     gap: 5px;
 }
 
 .item img {
     width: 65px;
-
     height: 65px;
-
     object-fit: contain;
 }
 
 .item span {
     font-size: 12px;
-
     font-weight: bold;
 }
 
 .item small {
     color: #aaa;
-
     font-size: 10px;
 }
-
 
 /* =====================================
    RESPONSIVE
 ===================================== */
 
 @media (max-width: 900px) {
-
     .game {
         grid-template-columns: 1fr;
+        grid-template-rows: 50vh 50vh;
     }
 
     .console-panel {
-        height: 50vh;
-
+        height: 100%;
         border-right: none;
-
         border-bottom: 2px solid #333;
     }
 
     .visual-panel {
-        height: 50vh;
+        height: 100%;
     }
 
     .merchant-container {
@@ -423,6 +438,8 @@ body {
     }
 
     .shop-items {
+        gap: 8px;
         transform: translateX(-50%) scale(0.75);
+        transform-origin: bottom center;
     }
 }
